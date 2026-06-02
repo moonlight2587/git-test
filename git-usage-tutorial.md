@@ -590,7 +590,7 @@ git archive 版本号 | tar -x -C D:\Code\old-version
 现在这份文件就是：
 
 ```text
-D:\Code\Git-test\git使用教程.md
+D:\Code\Git-test\git-usage-tutorial.md
 ```
 
 你可以这样提交并推送：
@@ -598,7 +598,7 @@ D:\Code\Git-test\git使用教程.md
 ```powershell
 cd D:\Code\Git-test
 git status
-git add git使用教程.md
+git add git-usage-tutorial.md
 git commit -m "Add Git usage tutorial"
 git push
 ```
@@ -610,3 +610,59 @@ git push -u origin main
 ```
 
 推送完成后，远端仓库就会有这份 Markdown 教程。
+
+## 16. 远端仓库改名后，本地配置如何改
+
+如果只是远端仓库改名，本地一般只需要修改 `origin` 的 URL。
+
+先查看当前远端地址：
+
+```powershell
+cd D:\Code\Git-test
+git remote -v
+```
+
+假设远端从：
+
+```text
+https://github.com/moonlight2587/git-test.git
+```
+
+改名成：
+
+```text
+https://github.com/moonlight2587/Git-How-Use.git
+```
+
+本地执行：
+
+```powershell
+git remote set-url origin https://github.com/moonlight2587/Git-How-Use.git
+```
+
+再确认：
+
+```powershell
+git remote -v
+```
+
+测试是否能连接远端：
+
+```powershell
+git fetch
+```
+
+如果正常，以后仍然直接使用：
+
+```powershell
+git push
+git pull
+```
+
+如果你改的是本地远端别名，比如想把 `origin` 改成 `github`，才使用：
+
+```powershell
+git remote rename origin github
+```
+
+实际工程里通常不需要改远端别名，只改 URL 就够了。
